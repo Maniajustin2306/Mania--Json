@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Product Table</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+<body>
+  <div class="container">
+    <h1 class="my-heading text-center mt-5 mb-5"><i class="fas fa-film"></i> Movie List <button id="button" class="my-button btn btn-secondary"> Show</button> </h1>
+    <div class="table-responsive">
+      <table class="table table-bordered border-dark table-striped p-3 mb-5">
+        <thead class="table-dark ">
+          <tr>
+            <th scope="col">MovieTitle</th>
+            <th scope="col">Top Cast</th>
+            <th scope="col">Director</th>
+            <th scope="col">Writers</th>
+            <th scope="col">ReleaseDate</th>
+          </tr>
+        </thead>
+        <tbody id="table-body" class="table-group-divider table-dark"></tbody>
+      </table>
+    </div>
+   
+  </div>
+  
+  <!-- Include jQuery and Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  
+  <script>
+    const loadButton = document.getElementById("button");
+    loadButton.addEventListener("click", function() {
+      const xmlhttp = new XMLHttpRequest();
+      xmlhttp.openxmlhttp.open("GET", "/Mania-Json/php/index.php");
+      xmlhttp.send();
+      xmlhttp.onload = function () {
+        const movie = JSON.parse(this.responseText);
+        var tableBody = document.getElementById("table-body");
+        tableBody.innerHTML = ""; // clear existing rows
+        for (var i in movie) {
+          var row = `<tr>
+            <td>${movie[i].movieTitle}</td>
+            <td>${movie[i].topCast}</td>
+            <td>${movie[i].director}</td>
+            <td>${movie[i].writers}</td>
+            <td>${movie[i].releaseDate}</td>
+         
+          </tr>`;
+          tableBody.innerHTML += row;
+        }
+      };
+    });
+  </script>
+</body>
+</html>
