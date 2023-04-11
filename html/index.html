@@ -38,7 +38,7 @@
     const loadButton = document.getElementById("button");
     loadButton.addEventListener("click", function() {
       const xmlhttp = new XMLHttpRequest();
-      xmlhttp.openxmlhttp.open("GET", "/Mania-Json/php/index.php");
+     xmlhttp.open("GET", "/Mania-Json/php/index.php");
       xmlhttp.send();
       xmlhttp.onload = function () {
         const movie = JSON.parse(this.responseText);
